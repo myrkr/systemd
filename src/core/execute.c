@@ -1866,6 +1866,20 @@ static int setup_runtime_directory(
         return 0;
 }
 
+static int setup_lsm_label(
+                const ExecContext *context,
+                const ExecCommand *command)
+{
+        if (context->lsm_process_label) {
+                const char *p;
+                pid_t pid = 0;
+                p = procfs_file_alloca(pid, "attr/current");
+                return write_string_file(p, context->lsm_process_label, 0);
+        } else {
+                return 0;
+        }
+}
+
 static int setup_smack(
                 const ExecContext *context,
                 const ExecCommand *command) {
@@ -2766,6 +2780,13 @@ static int exec_child(
                         }
                 }
 #endif
+
+                r = setup_lsm_label(context, command);
+                if (r < 0) {
+                        *exit_status = EXIT_LSM_PROCESS_LABEL;
+                        *error_message = strdup("Failed to set LSM process label");
+                        return r;
+                }
 
                 r = setup_smack(context, command);
                 if (r < 0) {

@@ -150,6 +150,8 @@ struct ExecContext {
         char *utmp_id;
         ExecUtmpMode utmp_mode;
 
+        char *lsm_process_label;
+
         bool selinux_context_ignore;
         char *selinux_context;
 

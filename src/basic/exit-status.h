@@ -81,6 +81,7 @@ enum {
         EXIT_RUNTIME_DIRECTORY,
         EXIT_MAKE_STARTER,
         EXIT_CHOWN,
+        EXIT_LSM_PROCESS_LABEL,
         EXIT_SMACK_PROCESS_LABEL,
         EXIT_KEYRING,
 };

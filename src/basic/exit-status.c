@@ -146,6 +146,9 @@ const char* exit_status_to_string(int status, ExitStatusLevel level) {
                 case EXIT_CHOWN:
                         return "CHOWN";
 
+                case EXIT_LSM_PROCESS_LABEL:
+                        return "LSM_PROCESS_LABEL";
+
                 case EXIT_SMACK_PROCESS_LABEL:
                         return "SMACK_PROCESS_LABEL";
 
